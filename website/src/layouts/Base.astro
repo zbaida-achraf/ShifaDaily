@@ -1,0 +1,175 @@
+---
+import Icon from '../components/Icon.astro';
+import { t, dirOf, otherLang } from '../i18n';
+import { type Lang, langPath, url, REPO_URL, RELEASE } from '../site';
+
+interface Props { lang: Lang; page: string; title: string; description?: string }
+const { lang, page, title, description } = Astro.props;
+const d = t(lang);
+const other = otherLang(lang);
+const site = Astro.site!;
+const canonical = new URL(langPath(lang, page), site).href;
+const altHref = (l: Lang) => new URL(langPath(l, page), site).href;
+const desc = description ?? d.meta.description;
+const fullTitle = page === '' ? title : `${title} · ${d.meta.siteName}`;
+const nav: [string, string][] = [
+  ['features', d.nav.features], ['how-it-works', d.nav.how], ['download', d.nav.download], ['faq', d.nav.faq], ['support', d.nav.support],
+];
+const ogImage = new URL(url('/og-image.png'), site).href;
+---
+<!doctype html>
+<html lang={lang} dir={dirOf(lang)}>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{fullTitle}</title>
+  <meta name="description" content={desc} />
+  <link rel="canonical" href={canonical} />
+  <link rel="alternate" hreflang="en" href={altHref('en')} />
+  <link rel="alternate" hreflang="ar" href={altHref('ar')} />
+  <link rel="alternate" hreflang="x-default" href={altHref('en')} />
+  <link rel="icon" href={url('/favicon.svg')} type="image/svg+xml" />
+  <link rel="icon" href={url('/favicon-32.png')} sizes="32x32" type="image/png" />
+  <link rel="apple-touch-icon" href={url('/apple-touch-icon.png')} />
+  <meta name="theme-color" content="#087F70" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content={d.meta.siteName} />
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={desc} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:locale" content={lang === 'ar' ? 'ar_MA' : 'en_GB'} />
+  <meta property="og:locale:alternate" content={lang === 'ar' ? 'en_GB' : 'ar_MA'} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <!-- No analytics, no trackers, no third-party resources. -->
+  <style is:global>
+    :root {
+      --primary: #087F70; --primary-dark: #075E54; --mint: #E8F5F1; --mint-2: #D6EFE8;
+      --bg: #F8FAFC; --surface: #FFFFFF; --ink: #172B2A; --ink-2: #55657A; --line: #DCE3E8;
+      --btn: #087F70; --btn-hover: #075E54; --warn-bg: #FFF1DC; --warn-ink: #4A2C00; --radius: 18px; --shadow: 0 1px 2px rgb(16 40 38 / .06), 0 8px 24px rgb(16 40 38 / .06);
+      --font: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Noto Sans Arabic", "Segoe UI Arabic", Tahoma, sans-serif;
+      color-scheme: light;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --primary: #6FD6C3; --primary-dark: #9FE3D6; --mint: #12312D; --mint-2: #1A3F39;
+        --bg: #0F1716; --surface: #151F1E; --ink: #E2ECEA; --ink-2: #A9BAB7; --line: #2A3836;
+        --btn: #0B7A6C; --btn-hover: #0D8C7C; --warn-bg: #3D2E0B; --warn-ink: #FFE3A8; --shadow: none; color-scheme: dark;
+      }
+    }
+    :root[data-theme="dark"] {
+      --primary: #6FD6C3; --primary-dark: #9FE3D6; --mint: #12312D; --mint-2: #1A3F39;
+      --bg: #0F1716; --surface: #151F1E; --ink: #E2ECEA; --ink-2: #A9BAB7; --line: #2A3836;
+      --btn: #0B7A6C; --btn-hover: #0D8C7C; --warn-bg: #3D2E0B; --warn-ink: #FFE3A8; --shadow: none; color-scheme: dark;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 1.0625rem; line-height: 1.65; }
+    html[lang="ar"] body { font-size: 1.125rem; line-height: 1.85; }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: var(--primary); text-underline-offset: 3px; }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; border-radius: 8px; }
+    h1, h2, h3 { line-height: 1.25; margin: 0 0 .5em; }
+    html[lang="ar"] h1, html[lang="ar"] h2, html[lang="ar"] h3 { line-height: 1.45; }
+    h1 { font-size: clamp(1.9rem, 4.5vw, 2.9rem); letter-spacing: -.01em; }
+    h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); }
+    h3 { font-size: 1.15rem; }
+    p { margin: 0 0 1em; }
+    .wrap { width: min(1120px, 100% - 32px); margin-inline: auto; }
+    .skip { position: absolute; inset-inline-start: 8px; top: -60px; background: var(--primary); color: #fff; padding: 8px 14px; border-radius: 10px; z-index: 10; }
+    .skip:focus { top: 8px; }
+    header.site { position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+    .bar { display: flex; align-items: center; gap: 16px; min-height: 68px; }
+    .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); }
+    .logo { width: 40px; height: 40px; border-radius: 12px; background: var(--primary); color: #fff; display: grid; place-items: center; flex: none; }
+    .brand b { display: block; font-size: 1.05rem; line-height: 1.2; }
+    .brand small { display: block; color: var(--ink-2); font-size: .8rem; line-height: 1.2; }
+    nav.main { margin-inline-start: auto; }
+    nav.main ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 4px; }
+    nav.main a { display: block; padding: 8px 12px; border-radius: 10px; text-decoration: none; color: var(--ink); font-weight: 500; }
+    nav.main a[aria-current="page"], nav.main a:hover { background: var(--mint); color: var(--primary-dark); }
+    .lang { padding: 8px 12px; border: 1px solid var(--line); border-radius: 10px; text-decoration: none; color: var(--ink); font-weight: 600; white-space: nowrap; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 10px 20px; border-radius: 14px; font-weight: 700; text-decoration: none; border: 1px solid transparent; font-size: 1rem; }
+    .btn-primary { background: var(--btn); color: #fff; }
+    .btn-primary:hover { background: var(--btn-hover); color: #fff; }
+    .btn-ghost { background: var(--surface); color: var(--ink); border-color: var(--line); }
+    .btn-ghost:hover { border-color: var(--primary); }
+    details.mobile-nav { display: none; }
+    @media (max-width: 900px) {
+      nav.main { display: none; }
+      details.mobile-nav { display: block; margin-inline-start: auto; position: relative; }
+      details.mobile-nav summary { list-style: none; cursor: pointer; padding: 10px; border-radius: 10px; border: 1px solid var(--line); display: flex; }
+      details.mobile-nav summary::-webkit-details-marker { display: none; }
+      details.mobile-nav ul { position: absolute; inset-inline-end: 0; top: 52px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); list-style: none; margin: 0; padding: 8px; min-width: 220px; }
+      details.mobile-nav a { display: block; padding: 10px 12px; text-decoration: none; color: var(--ink); border-radius: 10px; }
+      details.mobile-nav a:hover { background: var(--mint); }
+      .bar .cta-desktop { display: none; }
+    }
+    main { padding: 32px 0 64px; }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow); }
+    .grid { display: grid; gap: 16px; }
+    .notice { background: var(--mint); color: var(--primary-dark); border-radius: 14px; padding: 14px 16px; display: flex; gap: 10px; align-items: flex-start; }
+    .notice.warn { background: var(--warn-bg); color: var(--warn-ink); }
+    .notice svg { flex: none; margin-top: 3px; }
+    .muted { color: var(--ink-2); }
+    .badge { display: inline-block; background: var(--mint-2); color: var(--primary-dark); padding: 4px 12px; border-radius: 999px; font-size: .85rem; font-weight: 600; }
+    .prose { max-width: 760px; }
+    .prose ul, .prose ol { padding-inline-start: 1.4em; }
+    .prose li { margin-bottom: .45em; }
+    code, .mono { font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace; font-size: .9em; direction: ltr; unicode-bidi: isolate; }
+    .mono { word-break: break-all; }
+    footer.site { border-top: 1px solid var(--line); padding: 36px 0 48px; color: var(--ink-2); font-size: .95rem; }
+    footer.site .cols { display: flex; flex-wrap: wrap; gap: 24px 48px; justify-content: space-between; }
+    footer.site ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 18px; }
+    footer.site a { color: var(--ink-2); }
+    @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#content">{d.nav.skip}</a>
+  <header class="site">
+    <div class="wrap bar">
+      <a class="brand" href={langPath(lang)} aria-label={d.meta.siteName}>
+        <span class="logo"><Icon name="heart" size={22} /></span>
+        <span><b>{lang === 'ar' ? 'شفاء يومي' : 'ShifaDaily'}</b><small lang={lang === 'ar' ? 'en' : 'ar'} dir={lang === 'ar' ? 'ltr' : 'rtl'}>{lang === 'ar' ? 'ShifaDaily' : 'شفاء يومي'}</small></span>
+      </a>
+      <nav class="main" aria-label={d.nav.menu}>
+        <ul>{nav.map(([slug, label]) => <li><a href={langPath(lang, slug)} aria-current={page === slug ? 'page' : undefined}>{label}</a></li>)}</ul>
+      </nav>
+      <details class="mobile-nav">
+        <summary aria-label={d.nav.menu}><Icon name="menu" /></summary>
+        <ul>
+          <li><a href={langPath(lang)}>{d.nav.home}</a></li>
+          {nav.map(([slug, label]) => <li><a href={langPath(lang, slug)}>{label}</a></li>)}
+          <li><a href={langPath(lang, 'install')}>{d.nav.install}</a></li>
+        </ul>
+      </details>
+      <a class="lang" href={langPath(other, page)} hreflang={other} lang={other} aria-label={d.nav.langSwitchLabel}>{d.nav.langSwitch}</a>
+      {RELEASE.available && <a class="btn btn-primary cta-desktop" href={langPath(lang, 'download')}><Icon name="download" size={20} />{d.nav.download}</a>}
+    </div>
+  </header>
+  <main id="content"><div class="wrap"><slot /></div></main>
+  <footer class="site">
+    <div class="wrap">
+      <div class="cols">
+        <div>
+          <strong style="color:var(--ink)">{d.meta.siteName}</strong>
+          <p style="margin:.3em 0 0">{d.footer.tagline}</p>
+          <p style="margin:.3em 0 0">{d.footer.notMedical}</p>
+        </div>
+        <ul>
+          <li><a href={langPath(lang, 'privacy')}>{d.nav.privacy}</a></li>
+          <li><a href={langPath(lang, 'disclaimer')}>{d.nav.disclaimer}</a></li>
+          <li><a href={langPath(lang, 'support')}>{d.nav.support}</a></li>
+          <li><a href={langPath(lang, 'changelog')}>{d.nav.changelog}</a></li>
+          <li><a href={langPath(lang, 'install')}>{d.nav.install}</a></li>
+          <li><a href={langPath(lang, 'faq')}>{d.nav.faq}</a></li>
+          {REPO_URL && <li><a href={REPO_URL} rel="noopener">{d.footer.source}</a></li>}
+        </ul>
+      </div>
+      <p style="margin-top:24px">{d.footer.copyright}</p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,24 @@
+---
+// Small inline SVG icon set (no icon font, no external requests). Paths are original simple shapes.
+interface Props { name: string; size?: number }
+const { name, size = 24 } = Astro.props;
+const paths: Record<string, string> = {
+  bell: 'M12 3a6 6 0 0 0-6 6v3.5L4.5 15v1h15v-1L18 12.5V9a6 6 0 0 0-6-6Zm-2 15a2 2 0 0 0 4 0',
+  calendar: 'M5 5h14v15H5zM5 9h14M9 3v4M15 3v4',
+  history: 'M4 12a8 8 0 1 0 2.3-5.6M4 4v4h4M12 8v4l3 2',
+  leaf: 'M5 19c0-8 5-13 14-14-1 9-6 14-14 14Zm0 0 7-7',
+  basket: 'M4 10h16l-1.5 9h-13zM8 10l3-6M16 10l-3-6',
+  globe: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Zm-9 9h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18',
+  shield: 'M12 3 5 6v5c0 4.5 3 8 7 10 4-2 7-5.5 7-10V6z',
+  check: 'M5 12.5 10 17 19 7',
+  download: 'M12 4v11m0 0-4-4m4 4 4-4M5 19h14',
+  heart: 'M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z',
+  pulse: 'M4 12h4l2-4 3 8 2-4h5',
+  info: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Zm0 8v6m0-9.5v.5',
+  menu: 'M4 7h16M4 12h16M4 17h16',
+  code: 'M8 8l-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14',
+};
+const d = paths[name] ?? paths.info;
+---
+<svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d={d} /></svg>

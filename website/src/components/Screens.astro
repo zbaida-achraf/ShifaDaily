@@ -1,0 +1,24 @@
+---
+// Real screenshots captured from the release build on an Android 16 emulator (2026-10-19/20).
+import { type Lang, url } from '../site';
+import { t } from '../i18n';
+interface Props { lang: Lang; items: { file: string; alt: string }[] }
+const { lang, items } = Astro.props;
+const d = t(lang);
+---
+<div class="shots">
+  {items.map((s) => (
+    <figure>
+      <img src={url(`/screenshots/${s.file}.webp`)} alt={s.alt} width="540" height="1200" loading="lazy" decoding="async" />
+      <figcaption>{s.alt}</figcaption>
+    </figure>
+  ))}
+</div>
+<p class="muted small">{d.common.previewLabel}</p>
+<style>
+  .shots { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(200px, 240px); gap: 18px; overflow-x: auto; padding: 4px 2px 12px; scroll-snap-type: x mandatory; }
+  figure { margin: 0; scroll-snap-align: start; }
+  img { border-radius: 26px; border: 1px solid var(--line); box-shadow: var(--shadow); background: var(--surface); }
+  figcaption { font-size: .9rem; color: var(--ink-2); margin-top: 8px; text-align: center; }
+  .small { font-size: .85rem; }
+</style>

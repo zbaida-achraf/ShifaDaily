@@ -1,0 +1,39 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import Screens from '../../components/Screens.astro';
+import { t } from '../../i18n';
+import type { Lang } from '../../site';
+import { langPaths } from './_paths';
+export const getStaticPaths = langPaths;
+const lang = Astro.params.lang as Lang;
+const d = t(lang);
+---
+<Base lang={lang} page="features" title={d.features.title}>
+  <h1>{d.features.title}</h1>
+  <p class="muted">{d.features.intro}</p>
+  <div class="grid feat">
+    {d.features.items.map((f) => (
+      <article class="card">
+        <span class="ico"><Icon name={f.icon} /></span>
+        <h2 class="h3">{f.title}</h2>
+        <p class="muted">{f.body}</p>
+      </article>
+    ))}
+  </div>
+  <section style="margin-top:48px">
+    <h2>{d.features.guideTitle}</h2>
+    <p class="prose">{d.features.guideBody}</p>
+    <Screens lang={lang} items={[
+      { file: `${lang}-meals`, alt: d.shots.meals },
+      { file: `${lang}-recipe`, alt: d.shots.recipe },
+      { file: `${lang}-guide`, alt: d.shots.guide },
+      lang === 'en' ? { file: 'en-check', alt: d.shots.check } : { file: 'ar-meds', alt: d.shots.meds },
+    ]} />
+  </section>
+</Base>
+<style>
+  .feat { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); margin-top: 20px; }
+  .ico { display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 12px; background: var(--mint); color: var(--primary); margin-bottom: 10px; }
+  .h3 { font-size: 1.15rem; }
+</style>

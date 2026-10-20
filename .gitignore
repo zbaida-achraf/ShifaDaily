@@ -1,0 +1,30 @@
+# Android / Gradle
+android/.gradle/
+android/build/
+android/app/build/
+android/local.properties
+android/.kotlin/
+android/captures/
+*.iml
+.idea/
+
+# Signing material — never commit
+*.jks
+*.keystore
+android/keystore.properties
+signing/
+
+# Release artifacts (published as GitHub Release assets, not committed)
+release/
+
+# Website
+website/node_modules/
+website/dist/
+website/.astro/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local tool config
+.claude/

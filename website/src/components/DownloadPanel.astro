@@ -1,0 +1,47 @@
+---
+// Every value comes from src/data/release.json, generated from the real APK by
+// scripts/release-meta.mjs. Without a published release, no download button is shown.
+import Icon from './Icon.astro';
+import { t } from '../i18n';
+import { type Lang, RELEASE as r, formatSize, formatDate, langPath, ANDROID_NAME } from '../site';
+interface Props { lang: Lang; compact?: boolean }
+const { lang, compact = false } = Astro.props;
+const d = t(lang);
+const minAndroid = r.minSdk ? ANDROID_NAME[r.minSdk] ?? `API ${r.minSdk}` : '';
+---
+{r.available && r.apkUrl ? (
+  <section class="dl card" aria-labelledby="dl-title">
+    <h2 id="dl-title" class={compact ? 'sr-only' : ''}>{d.download.title}</h2>
+    <a class="btn btn-primary big" href={r.apkUrl} download={r.apkFileName}><Icon name="download" />{d.common.downloadCta}</a>
+    <dl class="meta">
+      <div><dt>{d.download.version}</dt><dd><span class="mono">{r.version}</span></dd></div>
+      <div><dt>{d.download.released}</dt><dd>{formatDate(r.releaseDate!, lang)}</dd></div>
+      <div><dt>{d.download.size}</dt><dd>{formatSize(r.sizeBytes!, lang)}</dd></div>
+      <div><dt>{d.download.requires}</dt><dd>{d.download.androidOrLater.replace('{v}', minAndroid)}</dd></div>
+      {!compact && <div class="wide"><dt>{d.download.checksum}</dt><dd class="mono">{r.sha256}</dd></div>}
+      {!compact && <div class="wide"><dt>{d.download.cert}</dt><dd class="mono">{r.certSha256}</dd></div>}
+      {!compact && <div><dt>{d.download.pkg}</dt><dd class="mono">{r.packageName}</dd></div>}
+    </dl>
+    <p class="links">
+      <a href={langPath(lang, 'install')}>{d.download.instructions}</a> ·
+      <a href={langPath(lang, 'changelog')}>{d.download.changelog}</a> ·
+      <a href={langPath(lang, 'privacy')}>{d.download.privacy}</a>
+    </p>
+  </section>
+) : (
+  <div class="notice warn" role="status">
+    <Icon name="info" />
+    <div><strong>{d.common.notAvailableTitle}</strong><p style="margin:.3em 0 0">{d.common.notAvailableBody}</p></div>
+  </div>
+)}
+<style>
+  .dl { display: grid; gap: 16px; }
+  .big { min-height: 56px; font-size: 1.1rem; justify-self: start; }
+  .meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px 20px; margin: 0; }
+  .meta div { min-width: 0; }
+  .meta .wide { grid-column: 1 / -1; }
+  dt { font-size: .85rem; color: var(--ink-2); }
+  dd { margin: 0; font-weight: 600; }
+  .links { margin: 0; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+</style>

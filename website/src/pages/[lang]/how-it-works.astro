@@ -1,0 +1,29 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import { t } from '../../i18n';
+import type { Lang } from '../../site';
+import { langPaths } from './_paths';
+export const getStaticPaths = langPaths;
+const lang = Astro.params.lang as Lang;
+const d = t(lang);
+---
+<Base lang={lang} page="how-it-works" title={d.how.title}>
+  <h1>{d.how.title}</h1>
+  <ol class="steps">
+    {d.how.steps.map((s, i) => <li class="card"><span class="num">{i + 1}</span><div><h2 class="h3">{s.title}</h2><p class="muted" style="margin:0">{s.body}</p></div></li>)}
+  </ol>
+  <section class="card" style="margin-top:32px">
+    <h2>{d.how.limitsTitle}</h2>
+    <ul class="limits">{d.how.limits.map((l) => <li><Icon name="info" size={20} /><span>{l}</span></li>)}</ul>
+  </section>
+</Base>
+<style>
+  .steps { list-style: none; padding: 0; margin: 20px 0 0; display: grid; gap: 14px; }
+  .steps li { display: flex; gap: 14px; align-items: flex-start; }
+  .num { flex: none; width: 36px; height: 36px; border-radius: 50%; background: var(--btn); color: #fff; display: grid; place-items: center; font-weight: 700; }
+  .h3 { font-size: 1.15rem; }
+  .limits { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+  .limits li { display: flex; gap: 10px; align-items: flex-start; }
+  .limits :global(svg) { flex: none; color: var(--primary); margin-top: 4px; }
+</style>

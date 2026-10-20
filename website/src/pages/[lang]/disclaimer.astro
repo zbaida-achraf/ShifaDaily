@@ -1,0 +1,19 @@
+---
+import Base from '../../layouts/Base.astro';
+import { t } from '../../i18n';
+import { type Lang, ISSUES_URL } from '../../site';
+import { langPaths } from './_paths';
+export const getStaticPaths = langPaths;
+const lang = Astro.params.lang as Lang;
+const d = t(lang);
+---
+<Base lang={lang} page="disclaimer" title={d.disclaimer.title}>
+  <div class="prose">
+    <h1>{d.disclaimer.title}</h1>
+    <p class="notice warn" style="display:block">{d.disclaimer.main}</p>
+    <h2>{d.disclaimer.listTitle}</h2>
+    <ul>{d.disclaimer.list.map((i) => <li>{i}</li>)}</ul>
+    <p><strong>{d.disclaimer.emergency}</strong></p>
+    <p class="muted">{d.disclaimer.leaflet}</p>
+  </div>
+</Base>

@@ -1,0 +1,21 @@
+---
+import Base from '../../layouts/Base.astro';
+import { t } from '../../i18n';
+import { type Lang, ISSUES_URL } from '../../site';
+import { langPaths } from './_paths';
+export const getStaticPaths = langPaths;
+const lang = Astro.params.lang as Lang;
+const d = t(lang);
+---
+<Base lang={lang} page="install" title={d.install.title}>
+  <div class="prose">
+    <h1>{d.install.title}</h1>
+    <p class="muted">{d.install.intro}</p>
+    <ol class="steps">{d.install.steps.map((s) => <li>{s}</li>)}</ol>
+    <h2>{d.install.updateTitle}</h2>
+    <p>{d.install.updateBody}</p>
+    <h2>{d.install.safetyTitle}</h2>
+    <ul>{d.install.safety.map((s) => <li>{s}</li>)}</ul>
+  </div>
+</Base>
+<style>.steps li { margin-bottom: .8em; padding-inline-start: .3em; }</style>

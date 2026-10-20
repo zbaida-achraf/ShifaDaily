@@ -1,0 +1,14 @@
+{
+  "name": "shifadaily-website",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build && node scripts/check-site.mjs",
+    "preview": "astro preview",
+    "release-meta": "node scripts/release-meta.mjs"
+  },
+  "dependencies": {
+    "astro": "7.3.5"
+  }
+}

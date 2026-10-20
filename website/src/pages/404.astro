@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import { dict } from '../i18n';
+import { langPath } from '../site';
+const en = dict.en.notFound, ar = dict.ar.notFound;
+---
+<Base lang="en" page="" title={en.title}>
+  <div class="prose">
+    <h1>{en.title}</h1><p>{en.body}</p><p><a href={langPath('en')}>{en.back}</a></p>
+    <div lang="ar" dir="rtl" style="margin-top:32px">
+      <h2>{ar.title}</h2><p>{ar.body}</p><p><a href={langPath('ar')}>{ar.back}</a></p>
+    </div>
+  </div>
+</Base>

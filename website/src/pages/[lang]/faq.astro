@@ -1,0 +1,26 @@
+---
+import Base from '../../layouts/Base.astro';
+import { t } from '../../i18n';
+import { type Lang, ISSUES_URL } from '../../site';
+import { langPaths } from './_paths';
+export const getStaticPaths = langPaths;
+const lang = Astro.params.lang as Lang;
+const d = t(lang);
+---
+<Base lang={lang} page="faq" title={d.faq.title}>
+  <div class="prose">
+    <h1>{d.faq.title}</h1>
+    {d.faq.items.map((f) => (
+      <details class="card qa">
+        <summary><h2 class="q">{f.q}</h2></summary>
+        <p>{f.a}</p>
+      </details>
+    ))}
+  </div>
+</Base>
+<style>
+  .qa { margin-bottom: 12px; padding: 0; }
+  .qa summary { cursor: pointer; padding: 18px 22px; list-style-position: inside; }
+  .qa p { padding: 0 22px 18px; margin: 0; }
+  .q { display: inline; font-size: 1.08rem; }
+</style>

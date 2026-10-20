@@ -1,0 +1,21 @@
+---
+import Base from '../../layouts/Base.astro';
+import { t } from '../../i18n';
+import { type Lang, ISSUES_URL } from '../../site';
+import { langPaths } from './_paths';
+export const getStaticPaths = langPaths;
+const lang = Astro.params.lang as Lang;
+const d = t(lang);
+---
+<Base lang={lang} page="support" title={d.support.title}>
+  <div class="prose">
+    <h1>{d.support.title}</h1>
+    <p>{d.support.body}</p>
+    {ISSUES_URL
+      ? <p><a class="btn btn-primary" href={ISSUES_URL} rel="noopener">{d.support.button}</a></p>
+      : <p class="notice">{d.support.noRepo}</p>}
+    <p class="notice warn" style="display:block">{d.support.warning}</p>
+    <h2>{d.support.tipsTitle}</h2>
+    <ul>{d.support.tips.map((i) => <li>{i}</li>)}</ul>
+  </div>
+</Base>

@@ -1,0 +1,16 @@
+---
+import Base from '../../layouts/Base.astro';
+import { t } from '../../i18n';
+import { type Lang, ISSUES_URL } from '../../site';
+import { langPaths } from './_paths';
+export const getStaticPaths = langPaths;
+const lang = Astro.params.lang as Lang;
+const d = t(lang);
+---
+<Base lang={lang} page="privacy" title={d.privacy.title}>
+  <div class="prose">
+    <h1>{d.privacy.title}</h1>
+    <p class="muted">{d.privacy.updated}</p>
+    {d.privacy.sections.map((s) => (<section><h2>{s.h}</h2>{s.p.map((p) => <p>{p}</p>)}</section>))}
+  </div>
+</Base>
