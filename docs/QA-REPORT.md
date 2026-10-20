@@ -101,7 +101,11 @@ adherence sentence; Trojan-source lint (`BidiSpoofing`) on literal bidi characte
 | English home desktop, dark scheme | PASS (visual) |
 | No release published → no download button; "not available" notice | PASS |
 | Production build rejects `localhost` URLs and non-HTTPS APK links | PASS (script) |
-| Deployed site / live download / checksum match | See §7 |
+| Deployed site https://zbaida-achraf.github.io/ShifaDaily/ (20 Oct 2026): `/`, `/en/`, `/ar/`, download, privacy, disclaimer, sitemap, robots, OG image, screenshots → HTTP 200; unknown path → 404 | PASS |
+| Live download: link read from the deployed `/en/download/` page → HTTP 200, 2 292 857 bytes; SHA-256 of the downloaded file **equals** the value shown on the page (`341dff20…2ed2ab23`) | PASS |
+| Downloaded APK: `aapt2` → `com.shifadaily.app` 1.0.0 (1), target 36; `apksigner verify` OK, cert SHA-256 `6d5bdc86…3278fd` | PASS |
+| Downloaded APK installed on the Android 16 emulator and launched (versionName 1.0.0) | PASS |
+| CI: GitHub Actions "Deploy website" build + deploy | PASS |
 
 ## 6. Not tested / known limitations
 
