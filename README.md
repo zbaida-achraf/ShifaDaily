@@ -36,7 +36,10 @@ cd website && npm ci && npm run build && npm run preview    # needs Node 22.22+
 
 - Android app: built, signed release APK + AAB, 49 unit tests passing, lint clean, tested on Android 16 and
   Android 8.0 emulators (see QA report). **Not tested on physical devices.**
-- Website: built and link-checked locally. Deployment status: see the final project report / GitHub Releases.
+- Website: https://zbaida-achraf.github.io/ShifaDaily/ (GitHub Pages, deployed by `.github/workflows/pages.yml`).
+- Download: [GitHub Release v1.0.0](https://github.com/zbaida-achraf/ShifaDaily/releases/tag/v1.0.0) — `ShifaDaily-1.0.0.apk`,
+  SHA-256 `341dff20e6785eb5ac431a936e5e35fbb9144faebbefd852273a915c2ed2ab23`.
+- Support: [GitHub Issues](https://github.com/zbaida-achraf/ShifaDaily/issues) (never post health information).
 - Not done: iOS, Google Play listing, trademark search, legal review (Law 09-08 / GDPR), physical-device
   and OEM battery-manager testing.
 

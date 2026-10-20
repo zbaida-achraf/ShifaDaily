@@ -1,1 +1,14 @@
-{ "available": false }
+{
+  "available": true,
+  "version": "1.0.0",
+  "versionCode": 1,
+  "packageName": "com.shifadaily.app",
+  "minSdk": 26,
+  "targetSdk": 36,
+  "sizeBytes": 2292857,
+  "sha256": "341dff20e6785eb5ac431a936e5e35fbb9144faebbefd852273a915c2ed2ab23",
+  "certSha256": "6d5bdc86a2f8911258309db756c5ecb772ea2b723ba712ff65870127da3278fd",
+  "releaseDate": "2026-10-20",
+  "apkUrl": "https://github.com/zbaida-achraf/ShifaDaily/releases/download/v1.0.0/ShifaDaily-1.0.0.apk",
+  "apkFileName": "ShifaDaily-1.0.0.apk"
+}
