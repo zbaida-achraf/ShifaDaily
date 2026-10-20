@@ -18,12 +18,4 @@ const minAndroid = RELEASE.minSdk ? ANDROID_NAME[RELEASE.minSdk] : '8.0';
     <ul>{d.download.requirements.map((r) => <li>{r.replace('{v}', minAndroid)}</li>)}</ul>
     <p class="muted" style="margin:0">{d.download.noIos}</p>
   </section>
-  {RELEASE.available && (
-    <section class="card" style="margin-top:24px">
-      <h2>{d.download.verifyTitle}</h2>
-      <p>{d.download.verifyBody}</p>
-      <p><code>certutil -hashfile {RELEASE.apkFileName} SHA256</code> (Windows)</p>
-      <p><code>shasum -a 256 {RELEASE.apkFileName}</code> (macOS / Linux)</p>
-    </section>
-  )}
 </Base>

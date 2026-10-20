@@ -18,9 +18,6 @@ const minAndroid = r.minSdk ? ANDROID_NAME[r.minSdk] ?? `API ${r.minSdk}` : '';
       <div><dt>{d.download.released}</dt><dd>{formatDate(r.releaseDate!, lang)}</dd></div>
       <div><dt>{d.download.size}</dt><dd>{formatSize(r.sizeBytes!, lang)}</dd></div>
       <div><dt>{d.download.requires}</dt><dd>{d.download.androidOrLater.replace('{v}', minAndroid)}</dd></div>
-      {!compact && <div class="wide"><dt>{d.download.checksum}</dt><dd class="mono">{r.sha256}</dd></div>}
-      {!compact && <div class="wide"><dt>{d.download.cert}</dt><dd class="mono">{r.certSha256}</dd></div>}
-      {!compact && <div><dt>{d.download.pkg}</dt><dd class="mono">{r.packageName}</dd></div>}
     </dl>
     <p class="links">
       <a href={langPath(lang, 'install')}>{d.download.instructions}</a> ·
@@ -39,7 +36,6 @@ const minAndroid = r.minSdk ? ANDROID_NAME[r.minSdk] ?? `API ${r.minSdk}` : '';
   .big { min-height: 56px; font-size: 1.1rem; justify-self: start; }
   .meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px 20px; margin: 0; }
   .meta div { min-width: 0; }
-  .meta .wide { grid-column: 1 / -1; }
   dt { font-size: .85rem; color: var(--ink-2); }
   dd { margin: 0; font-weight: 600; }
   .links { margin: 0; }
