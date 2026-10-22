@@ -12,5 +12,6 @@ const d = t(lang);
     <h1>{d.privacy.title}</h1>
     <p class="muted">{d.privacy.updated}</p>
     {d.privacy.sections.map((s) => (<section><h2>{s.h}</h2>{s.p.map((p) => <p>{p}</p>)}</section>))}
+    <section><h2>{d.privacy.contactH}</h2><p>{d.privacy.contactP}</p>{ISSUES_URL && <p><a href={ISSUES_URL} rel="noopener">{d.privacy.contactLink}</a></p>}</section>
   </div>
 </Base>

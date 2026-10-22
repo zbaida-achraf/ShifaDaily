@@ -99,7 +99,10 @@ export const en = {
   },
   privacy: {
     title: 'Privacy policy',
-    updated: 'Last updated: 19 October 2026',
+    updated: 'Last updated: 22 October 2026',
+    contactH: 'Contact',
+    contactP: 'Publisher: ShifaDaily (individual developer). For any question about this policy or your data, open an issue on the project page. Do not include health information or personal details.',
+    contactLink: 'ShifaDaily on GitHub (Issues)',
     sections: [
       { h: 'Summary', p: ['ShifaDaily keeps your health information on your phone. We do not collect, receive or sell any personal data.'] },
       { h: 'The app', p: [

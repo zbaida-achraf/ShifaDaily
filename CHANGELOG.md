@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.1 (versionCode 2) — 2026-10-22
+
+- Accessibility: the "Add medication" button is now announced by screen readers (it had no accessible label).
+- Prepared for Google Play (store listing kit in `play-store/`).
+
 ## 1.0.0 (versionCode 1) — 2026-10-20
 
 First public release.

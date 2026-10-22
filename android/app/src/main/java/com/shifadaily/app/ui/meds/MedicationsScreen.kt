@@ -32,6 +32,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.shifadaily.app.AppContainer
@@ -62,10 +64,13 @@ fun MedicationsScreen(container: AppContainer, nav: NavHostController) {
             }
         },
         floatingActionButton = {
+            val addLabel = stringResource(R.string.add_medication)
             ExtendedFloatingActionButton(
                 onClick = { nav.navigate(Routes.medEdit()) },
+                // Explicit label: emulator QA showed the FAB text was not exposed to accessibility services.
+                modifier = Modifier.semantics { contentDescription = addLabel },
                 icon = { Icon(Icons.Filled.Add, contentDescription = null) },
-                text = { Text(stringResource(R.string.add_medication)) },
+                text = { Text(addLabel) },
             )
         },
     ) { padding ->

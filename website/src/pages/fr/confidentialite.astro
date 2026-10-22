@@ -1,0 +1,70 @@
+---
+// French privacy policy, linked from the French Google Play listing. Same content as /en/privacy/.
+import { url, langPath, ISSUES_URL } from '../../site';
+const canonical = new URL(url('/fr/confidentialite/'), Astro.site).href;
+---
+<!doctype html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Règles de confidentialité · ShifaDaily</title>
+  <meta name="description" content="Règles de confidentialité de l'application ShifaDaily (شفاء يومي) : vos données restent sur votre téléphone." />
+  <link rel="canonical" href={canonical} />
+  <link rel="alternate" hreflang="en" href={new URL(langPath('en', 'privacy'), Astro.site).href} />
+  <link rel="alternate" hreflang="ar" href={new URL(langPath('ar', 'privacy'), Astro.site).href} />
+  <link rel="icon" href={url('/favicon.svg')} type="image/svg+xml" />
+  <style>
+    :root { --primary:#087F70; --ink:#172B2A; --ink2:#55657A; --bg:#F8FAFC; --line:#DCE3E8; color-scheme: light dark; }
+    @media (prefers-color-scheme: dark) { :root { --primary:#6FD6C3; --ink:#E2ECEA; --ink2:#A9BAB7; --bg:#0F1716; --line:#2A3836; } }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:system-ui,"Segoe UI",Roboto,sans-serif; font-size:1.0625rem; line-height:1.65; }
+    main { width:min(760px, 100% - 32px); margin:0 auto; padding:32px 0 64px; }
+    header { border-bottom:1px solid var(--line); }
+    header div { width:min(760px, 100% - 32px); margin:0 auto; padding:16px 0; display:flex; gap:16px; align-items:center; justify-content:space-between; flex-wrap:wrap; }
+    a { color:var(--primary); }
+    h1 { font-size:2rem; line-height:1.25; margin:0 0 .3em; }
+    h2 { font-size:1.3rem; margin:1.6em 0 .4em; }
+    .muted { color:var(--ink2); }
+  </style>
+</head>
+<body>
+  <header><div><a href={langPath('en')}><strong>ShifaDaily</strong> · <span lang="ar" dir="rtl">شفاء يومي</span></a>
+    <span><a href={langPath('en', 'privacy')} hreflang="en" lang="en">English</a> · <a href={langPath('ar', 'privacy')} hreflang="ar" lang="ar">العربية</a></span></div></header>
+  <main>
+    <h1>Règles de confidentialité</h1>
+    <p class="muted">Dernière mise à jour : 22 octobre 2026 · Application : ShifaDaily (<span lang="ar">شفاء يومي</span>), Android, <span lang="en">com.shifadaily.app</span></p>
+
+    <h2>En résumé</h2>
+    <p>ShifaDaily conserve vos informations de santé sur votre téléphone. Nous ne collectons, ne recevons et ne vendons aucune donnée personnelle.</p>
+
+    <h2>Données traitées par l'application</h2>
+    <p>L'application enregistre uniquement dans son espace de stockage privé, sur votre appareil : les médicaments que vous saisissez (nom, dose, horaires, notes), l'historique de vos prises et ses modifications, votre garde-manger, vos préférences alimentaires et allergies, les recettes enregistrées et les réglages.</p>
+    <p>L'application ne possède pas d'autorisation d'accès à Internet. Elle n'envoie rien, ni à nous ni à des tiers. Elle ne contient aucun système de compte, aucune publicité, aucun outil d'analyse ni de rapport de plantage.</p>
+
+    <h2>Sauvegardes, export et suppression</h2>
+    <p>Les données de l'application sont exclues des sauvegardes cloud d'Android et des transferts entre appareils. Vous pouvez exporter une copie lisible (dans l'emplacement de votre choix) ou tout effacer depuis les Réglages. La désinstallation supprime également toutes les données.</p>
+
+    <h2>Sécurité</h2>
+    <p>Les données sont protégées par l'isolation des applications Android et le chiffrement du stockage de votre appareil. ShifaDaily n'ajoute pas de chiffrement supplémentaire : une personne capable de déverrouiller votre téléphone, ou un appareil rooté ou compromis, pourrait y accéder. Utilisez un verrouillage d'écran. Les notifications masquent par défaut le nom du médicament sur l'écran de verrouillage (selon les réglages de votre téléphone).</p>
+
+    <h2>Autorisations</h2>
+    <p>Notifications (afficher les rappels), « Alarmes et rappels » (rappels à l'heure exacte), démarrage de l'appareil (rétablir les rappels après un redémarrage) et vibration. Aucune autre autorisation n'est demandée.</p>
+
+    <h2>Site web et téléchargement</h2>
+    <p>Le site est statique et n'utilise ni cookies, ni outils d'analyse, ni publicité. L'hébergeur (GitHub Pages) et l'hébergement du fichier APK (GitHub Releases) traitent des données techniques comme l'adresse IP pour fournir les pages et fichiers ; voir la déclaration de confidentialité de GitHub. Les installations depuis Google Play sont soumises aux règles de Google.</p>
+
+    <h2>Enfants</h2>
+    <p>ShifaDaily n'est pas conçu pour les enfants.</p>
+
+    <h2>Avertissement santé</h2>
+    <p>ShifaDaily est un outil d'organisation, pas un dispositif médical. Il ne pose pas de diagnostic et ne remplace pas l'avis d'un professionnel de santé.</p>
+
+    <h2>Modifications</h2>
+    <p>En cas de changement, la nouvelle version sera publiée sur cette page avec une nouvelle date.</p>
+
+    <h2>Contact</h2>
+    <p>Éditeur : ShifaDaily (développeur individuel). Pour toute question sur ces règles ou sur vos données, ouvrez un ticket sur la page du projet. N'y indiquez jamais d'informations de santé ou personnelles.</p>
+    {ISSUES_URL && <p><a href={ISSUES_URL} rel="noopener">ShifaDaily sur GitHub (Issues)</a></p>}
+  </main>
+</body>
+</html>

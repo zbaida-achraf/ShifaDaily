@@ -28,3 +28,6 @@ Thumbs.db
 
 # Local tool config
 .claude/
+
+# Play Store render scratch
+play-store/src/work/
